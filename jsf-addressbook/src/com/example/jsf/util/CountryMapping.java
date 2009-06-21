@@ -11,6 +11,8 @@ import javax.faces.component.UISelectItems;
 import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.model.SelectItem;
 
+import org.apache.commons.collections.bidimap.TreeBidiMap;
+
 public class CountryMapping {
 
 	/**
@@ -275,11 +277,11 @@ public class CountryMapping {
 	}
 
 	/**
-	 * Returns a Sorted Map of all Countries
+	 * Returns a Sorted Map (by Key) of all Countries
 	 * 
 	 * @return TreeMap<String, String>
 	 */
-	public Map<String, String> getSortedCountryMap() {
+	public Map<String, String> getKeySortedCountryMap() {
 		SortedMap<String, String> tm = new TreeMap<String, String>();
 
 		Map<String, String> m = getCountryMap();
@@ -298,9 +300,12 @@ public class CountryMapping {
 		HtmlSelectOneMenu countrySelectOneMenu = new HtmlSelectOneMenu();
 		final Collection<SelectItem> list = new ArrayList<SelectItem>();
 
-		Map<String, String> m = getSortedCountryMap();
-		for (String s : m.keySet()) {
-			list.add(new SelectItem(s, m.get(s)));
+		// Get the values from the countryMapping HashMap in inverse order; with
+		// values *as* keys. This ensures the values listed in the dropdown are
+		// ordered correctly
+		TreeBidiMap tbm = new TreeBidiMap(countryMapping);
+		for (Object o : tbm.inverseOrderedBidiMap().keySet()) {
+			list.add(new SelectItem(o, (String) tbm.get(o)));
 		}
 
 		final UISelectItems items = new UISelectItems();
@@ -308,5 +313,4 @@ public class CountryMapping {
 		countrySelectOneMenu.getChildren().add(items);
 		return countrySelectOneMenu;
 	}
-
 }
