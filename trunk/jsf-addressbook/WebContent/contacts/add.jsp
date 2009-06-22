@@ -48,7 +48,7 @@
 				</p>
 				<p>
 					<h:outputText value="State/Province (if required)" />
-					<h:inputText value="#{AddressBean.state}" />
+					<h:selectOneMenu binding="#{StateMappingBean.usStateMappingSelectOneMenu}" styleClass="common-dropdown" value="#{AddressBean.state}" />
 				</p>
 				<p>
 					<h:outputText value="Country"/>	
