@@ -31,6 +31,11 @@
 	<managed-bean-class>com.example.jsf.util.CountryMapping</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean>
+<managed-bean>
+	<managed-bean-name>StateMappingBean</managed-bean-name>
+	<managed-bean-class>com.example.jsf.util.StateMapping</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
 
 <navigation-rule>
 	<from-view-id>/contacts/add.jsp</from-view-id>
