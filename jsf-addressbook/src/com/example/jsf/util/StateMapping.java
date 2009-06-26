@@ -23,6 +23,7 @@ import com.example.jsf.exception.IsoCountryCodeError;
  */
 public class StateMapping {
 
+	private HtmlSelectOneMenu stateSelectOneMenu;
 	// US State Mapping
 	private final Map<String, String> USStateMapping = new HashMap<String, String>() {
 
@@ -108,13 +109,13 @@ public class StateMapping {
 		}
 	};
 
-	private Map<String, String> getUSStateMapping() {
-		return USStateMapping;
-	}
-
-	private Map<String, String> getCAStateMapping() {
-		return CAStateMapping;
-	}
+	// private Map<String, String> getUSStateMapping() {
+	// return USStateMapping;
+	// }
+	//
+	// private Map<String, String> getCAStateMapping() {
+	// return CAStateMapping;
+	// }
 
 	/**
 	 * Takes a Postal Abbreviation State Code for US / Canada and returns the
@@ -177,7 +178,7 @@ public class StateMapping {
 	 * @see: http://www.coderanch.com/t/211197/JSF/java/JSF-drop-down
 	 */
 	public HtmlSelectOneMenu getUsStateMappingSelectOneMenu() {
-		HtmlSelectOneMenu countrySelectOneMenu = new HtmlSelectOneMenu();
+		stateSelectOneMenu = new HtmlSelectOneMenu();
 		final Collection<SelectItem> list = new ArrayList<SelectItem>();
 
 		Map<String, String> m = getUSStates();
@@ -187,8 +188,12 @@ public class StateMapping {
 
 		final UISelectItems items = new UISelectItems();
 		items.setValue(list);
-		countrySelectOneMenu.getChildren().add(items);
-		return countrySelectOneMenu;
+		stateSelectOneMenu.getChildren().add(items);
+		return stateSelectOneMenu;
+	}
+	
+	public void setUsStateMappingSelectOneMenu(HtmlSelectOneMenu h){
+		stateSelectOneMenu = h;
 	}
 
 }

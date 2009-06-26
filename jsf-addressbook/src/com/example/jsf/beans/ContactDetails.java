@@ -93,4 +93,11 @@ public class ContactDetails {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "ContactDetails [email=" + email + ", gMapsUrl=" + gMapsUrl
+				+ ", homeTelephone=" + homeTelephone + ", mobileTelephone="
+				+ mobileTelephone + "]";
+	}
+
 }

@@ -138,5 +138,13 @@ public class Address {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Address [city=" + city + ", country=" + country + ", locality="
+				+ locality + ", postalCode=" + postalCode + ", state=" + state
+				+ ", streetAddress1=" + streetAddress1 + ", streetAddress2="
+				+ streetAddress2 + "]";
+	}
 
 }

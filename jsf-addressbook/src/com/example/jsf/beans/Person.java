@@ -142,4 +142,12 @@ public class Person {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Person [address=" + address + ", contactDetails="
+				+ contactDetails + ", dateOfBirth=" + dateOfBirth
+				+ ", firstName=" + firstName + ", location=" + location
+				+ ", middleName=" + middleName + ", surName=" + surName + "]";
+	}
+
 }

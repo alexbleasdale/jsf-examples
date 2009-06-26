@@ -22,6 +22,8 @@ public class CountryMapping {
 	 * @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	 */
 
+	private HtmlSelectOneMenu countrySelectOneMenu;
+	
 	private final Map<String, String> countryMapping = new HashMap<String, String>() {
 
 		private static final long serialVersionUID = -6780405953812445040L;
@@ -297,7 +299,7 @@ public class CountryMapping {
 	 * @see: http://www.coderanch.com/t/211197/JSF/java/JSF-drop-down
 	 */
 	public HtmlSelectOneMenu getCountryMappingSelectOneMenu() {
-		HtmlSelectOneMenu countrySelectOneMenu = new HtmlSelectOneMenu();
+		countrySelectOneMenu = new HtmlSelectOneMenu();
 		final Collection<SelectItem> list = new ArrayList<SelectItem>();
 
 		// Get the values from the countryMapping HashMap in inverse order; with
@@ -312,5 +314,9 @@ public class CountryMapping {
 		items.setValue(list);
 		countrySelectOneMenu.getChildren().add(items);
 		return countrySelectOneMenu;
+	}
+	
+	public void setCountryMappingSelectOneMenu(HtmlSelectOneMenu h) {
+		countrySelectOneMenu = h;
 	}
 }

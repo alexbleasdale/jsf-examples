@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <faces-config
     xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -35,8 +34,7 @@
 	<managed-bean-name>StateMappingBean</managed-bean-name>
 	<managed-bean-class>com.example.jsf.util.StateMapping</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
-</managed-bean>
-
+</managed-bean> 
 <navigation-rule>
 	<from-view-id>/contacts/add.jsp</from-view-id>
 	<navigation-case>

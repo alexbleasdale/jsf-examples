@@ -58,4 +58,10 @@ public class Location {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Location [latitude=" + latitude + ", longtude=" + longtude
+				+ "]";
+	}
+
 }
