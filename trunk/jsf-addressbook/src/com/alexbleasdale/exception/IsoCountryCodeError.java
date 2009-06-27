@@ -1,4 +1,4 @@
-package com.example.jsf.exception;
+package com.alexbleasdale.exception;
 
 public class IsoCountryCodeError extends Exception {
 

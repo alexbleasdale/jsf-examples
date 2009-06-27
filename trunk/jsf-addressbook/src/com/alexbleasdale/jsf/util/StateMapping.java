@@ -1,4 +1,4 @@
-package com.example.jsf.util;
+package com.alexbleasdale.jsf.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import javax.faces.component.UISelectItems;
 import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.model.SelectItem;
 
-import com.example.jsf.exception.IsoCountryCodeError;
+import com.alexbleasdale.exception.IsoCountryCodeError;
 
 /**
  * 
