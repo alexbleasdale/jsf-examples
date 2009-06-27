@@ -56,13 +56,35 @@ public class TestPersistPersonBeanWithHibernate {
 
 	@Test
 	public void testDAOFunctionality() throws DataNotFound {
-		ContactDAO cd = new ContactDAO();
+
 		List<Person> l = cd.getContacts();
 
-		for (Person p : l) {
-			System.out.println(p.getFirstName() + " " + p.getSurName());
-		}
+		// for (Person p : l) {
+		// System.out.println(p.getFirstName() + " " + p.getSurName());
+		// }
 
 		Assert.assertTrue(l.size() == 1);
 	}
+
+	@Test
+	public void testGetPersonBySurame() throws DataNotFound {
+		Person p = cd.getPersonBySurname("Person");
+		Assert.assertEquals("Test", p.getFirstName());
+	}
+
+	@Test
+	public void testGetPersonBySurameThenUpdateRecord() throws Exception {
+		Person p = cd.getPersonBySurname("Person");
+		Assert.assertEquals("Test", p.getFirstName());
+		p.getContactDetails().setHomeTelephone("123-456-7890");
+		p.getContactDetails().setMobileTelephone("098-765-4321");
+
+		cd.saveOrUpdatePerson(p);
+
+		Person p2 = cd.getPersonBySurname("Person");
+		Assert.assertEquals("123-456-7890", p2.getContactDetails()
+				.getHomeTelephone());
+
+	}
+
 }

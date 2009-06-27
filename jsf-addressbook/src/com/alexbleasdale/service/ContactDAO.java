@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.alexbleasdale.beans.Person;
@@ -28,6 +29,28 @@ public class ContactDAO extends DAO {
 			Session s = HibernateUtil.beginTransaction();
 			List<Person> results = s.createQuery("from Person").list();
 			return results;
+		} catch (HibernateException e) {
+			log
+					.log(Level.SEVERE,
+							"The DAO could not retrieve the user list", e);
+			throw new DataNotFound("The DAO could not retrieve the user list",
+					e);
+		}
+	}
+
+	public Person getPersonBySurname(String name) throws DataNotFound {
+
+		try {
+			Session s = HibernateUtil.beginTransaction();
+			Query q = s.createQuery("from Person p where p.surName = :name");
+			q.setString("name", name);
+			List<?> results = q.list();
+			Person p = null;
+			if (results.size() == 1) {
+				p = (Person) results.get(0);
+			}
+			return p;
+
 		} catch (HibernateException e) {
 			log.log(Level.SEVERE, "The DAO could not retrieve the named user",
 					e);
@@ -56,4 +79,5 @@ public class ContactDAO extends DAO {
 		}
 
 	}
+
 }
