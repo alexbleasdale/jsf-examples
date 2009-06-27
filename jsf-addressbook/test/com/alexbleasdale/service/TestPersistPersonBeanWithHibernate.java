@@ -1,6 +1,7 @@
 package com.alexbleasdale.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
@@ -9,8 +10,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.alexbleasdale.beans.Address;
+import com.alexbleasdale.beans.ContactDetails;
 import com.alexbleasdale.beans.Location;
 import com.alexbleasdale.beans.Person;
+import com.alexbleasdale.exception.DataNotFound;
 import com.alexbleasdale.hibernate.HibernateUtil;
 
 public class TestPersistPersonBeanWithHibernate {
@@ -23,29 +26,48 @@ public class TestPersistPersonBeanWithHibernate {
 	}
 
 	@Test
-	public void PersistOnePersonToDb() throws Exception {
+	public void testAddOnePersonToDb() throws Exception {
 
-		Session s = HibernateUtil.beginTransaction();
+		try {
+			Session s = HibernateUtil.beginTransaction();
 
-		Person p = new Person();
-		p.setFirstName("Test");
-		p.setMiddleName("A");
-		p.setSurName("Person");
-		p.setDateOfBirth(new Date());
+			Person p = new Person();
+			p.setFirstName("Test");
+			p.setMiddleName("A");
+			p.setSurName("Person");
+			p.setDateOfBirth(new Date());
 
-		Address a = new Address();
-		a.setCity("London");
-		a.setCountry("England");
-		p.setAddress(a);
+			Address a = new Address();
+			a.setCity("London");
+			a.setCountry("England");
+			p.setAddress(a);
 
-		Location l = new Location();
-		l.setLongitude(10.0);
-		l.setLatitude(10.0);
-		p.setLocation(l);
+			ContactDetails c = new ContactDetails();
+			c.setEmail("test@example.com");
+			p.setContactDetails(c);
 
-		s.saveOrUpdate(p);
+			Location l = new Location();
+			l.setLongitude(10.0);
+			l.setLatitude(10.0);
+			p.setLocation(l);
 
-		HibernateUtil.commitTransaction();
+			s.saveOrUpdate(p);
 
+			HibernateUtil.commitTransaction();
+		} catch (Exception e) {
+			HibernateUtil.rollbackTransaction();
+			throw e;
+		}
+
+	}
+
+	@Test
+	public void testDAOFunctionality() throws DataNotFound {
+		ContactDAO cd = new ContactDAO();
+		List<Person> l = cd.getContacts();
+
+		for (Person p : l) {
+			System.out.println(p.getFirstName() + " " + p.getSurName());
+		}
 	}
 }
