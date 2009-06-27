@@ -1,7 +1,13 @@
 package com.example.jsf.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class ContactDetails {
 
+	private Long id;
 	private String homeTelephone;
 	private String mobileTelephone;
 	private String email;
@@ -10,6 +16,16 @@ public class ContactDetails {
 	/**
 	 * Getters and Setters
 	 */
+
+	@Id
+	@GeneratedValue
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getHomeTelephone() {
 		return homeTelephone;
@@ -92,6 +108,10 @@ public class ContactDetails {
 			return false;
 		return true;
 	}
+
+	/**
+	 * toString()
+	 */
 
 	@Override
 	public String toString() {

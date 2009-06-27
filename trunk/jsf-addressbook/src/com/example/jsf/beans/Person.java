@@ -2,12 +2,26 @@ package com.example.jsf.beans;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Person {
 
+	private Long id;
 	private String firstName;
 	private String middleName;
 	private String surName;
 	private Date dateOfBirth;
+
 	private Address address;
 	private ContactDetails contactDetails;
 	private Location location;
@@ -15,6 +29,16 @@ public class Person {
 	/**
 	 * Getter and Setter methods
 	 */
+
+	@Id
+	@GeneratedValue
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -48,6 +72,8 @@ public class Person {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	public Address getAddress() {
 		return address;
 	}
@@ -56,6 +82,8 @@ public class Person {
 		this.address = address;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	public ContactDetails getContactDetails() {
 		return contactDetails;
 	}
@@ -64,6 +92,8 @@ public class Person {
 		this.contactDetails = contactDetails;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	public Location getLocation() {
 		return location;
 	}
@@ -73,9 +103,8 @@ public class Person {
 	}
 
 	/**
-	 * hashCode and equals methods
+	 * hashCode and equals
 	 */
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -87,6 +116,7 @@ public class Person {
 				+ ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
 		result = prime * result
 				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((location == null) ? 0 : location.hashCode());
 		result = prime * result
@@ -124,6 +154,11 @@ public class Person {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (location == null) {
 			if (other.location != null)
 				return false;
@@ -142,12 +177,17 @@ public class Person {
 		return true;
 	}
 
+	/**
+	 * toString()
+	 */
+
 	@Override
 	public String toString() {
 		return "Person [address=" + address + ", contactDetails="
 				+ contactDetails + ", dateOfBirth=" + dateOfBirth
-				+ ", firstName=" + firstName + ", location=" + location
-				+ ", middleName=" + middleName + ", surName=" + surName + "]";
+				+ ", firstName=" + firstName + ", id=" + id + ", location="
+				+ location + ", middleName=" + middleName + ", surName="
+				+ surName + "]";
 	}
 
 }
