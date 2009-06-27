@@ -23,7 +23,7 @@ public class CountryMapping {
 	 */
 
 	private HtmlSelectOneMenu countrySelectOneMenu;
-	
+
 	private final Map<String, String> countryMapping = new HashMap<String, String>() {
 
 		private static final long serialVersionUID = -6780405953812445040L;
@@ -305,6 +305,7 @@ public class CountryMapping {
 		// Get the values from the countryMapping HashMap in inverse order; with
 		// values *as* keys. This ensures the values listed in the dropdown are
 		// ordered correctly
+
 		TreeBidiMap tbm = new TreeBidiMap(countryMapping);
 		for (Object o : tbm.inverseOrderedBidiMap().keySet()) {
 			list.add(new SelectItem(o, (String) tbm.get(o)));
@@ -315,7 +316,7 @@ public class CountryMapping {
 		countrySelectOneMenu.getChildren().add(items);
 		return countrySelectOneMenu;
 	}
-	
+
 	public void setCountryMappingSelectOneMenu(HtmlSelectOneMenu h) {
 		countrySelectOneMenu = h;
 	}
