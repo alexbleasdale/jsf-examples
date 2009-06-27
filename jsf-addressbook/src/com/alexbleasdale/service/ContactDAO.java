@@ -80,4 +80,23 @@ public class ContactDAO extends DAO {
 
 	}
 
+	/**
+	 * Deletes a contact (Person)
+	 * 
+	 * @param p
+	 * 
+	 * @throws Exception
+	 */
+	public void deletePerson(Person p) throws Exception {
+		try {
+			Session s = HibernateUtil.beginTransaction();
+			s.delete(p);
+			HibernateUtil.commitTransaction();
+		} catch (Exception e) {
+			log.log(Level.SEVERE, "The DAO could not delete the Contact", e);
+			HibernateUtil.rollbackTransaction();
+			throw new DataNotFound("The DAO could not delete the Contact", e);
+		}
+	}
+
 }
