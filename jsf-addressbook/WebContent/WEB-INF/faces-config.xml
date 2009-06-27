@@ -4,35 +4,34 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
     version="1.2">
- 
 <managed-bean>
 	<managed-bean-name>PersonBean</managed-bean-name>
-	<managed-bean-class>com.example.jsf.beans.Person</managed-bean-class>
+	<managed-bean-class>com.alexbleasdale.beans.Person</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean>
 <managed-bean>
 	<managed-bean-name>AddressBean</managed-bean-name>
-	<managed-bean-class>com.example.jsf.beans.Address</managed-bean-class>
+	<managed-bean-class>com.alexbleasdale.beans.Address</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean>
 <managed-bean>
 	<managed-bean-name>ContactDetailsBean</managed-bean-name>
-	<managed-bean-class>com.example.jsf.beans.ContactDetails</managed-bean-class>
+	<managed-bean-class>com.alexbleasdale.beans.ContactDetails</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean>
 <managed-bean>
 	<managed-bean-name>LocationBean</managed-bean-name>
-	<managed-bean-class>com.example.jsf.beans.Location</managed-bean-class>
+	<managed-bean-class>com.alexbleasdale.beans.Location</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean>
 <managed-bean>
 	<managed-bean-name>CountryMappingBean</managed-bean-name>
-	<managed-bean-class>com.example.jsf.util.CountryMapping</managed-bean-class>
+	<managed-bean-class>com.alexbleasdale.jsf.util.CountryMapping</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean>
 <managed-bean>
 	<managed-bean-name>StateMappingBean</managed-bean-name>
-	<managed-bean-class>com.example.jsf.util.StateMapping</managed-bean-class>
+	<managed-bean-class>com.alexbleasdale.jsf.util.StateMapping</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean> 
 <navigation-rule>
@@ -42,5 +41,4 @@
 		<to-view-id>/contacts/result.jsp</to-view-id>
 	</navigation-case>
 </navigation-rule>
-
 </faces-config>
