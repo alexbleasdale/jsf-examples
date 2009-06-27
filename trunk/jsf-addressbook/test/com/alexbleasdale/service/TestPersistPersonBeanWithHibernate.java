@@ -25,12 +25,8 @@ public class TestPersistPersonBeanWithHibernate {
 		Configuration config;
 		config = HibernateUtil.getInitializedConfiguration();
 		new SchemaExport(config).create(true, true);
-		cd = new ContactDAO();
-	}
 
-	@Test
-	public void testAddOnePersonToDb() throws Exception {
-
+		// Create a new Contact
 		Person p = new Person();
 		p.setFirstName("Test");
 		p.setMiddleName("A");
@@ -51,23 +47,19 @@ public class TestPersistPersonBeanWithHibernate {
 		l.setLatitude(10.0);
 		p.setLocation(l);
 
+		cd = new ContactDAO();
 		cd.saveOrUpdatePerson(p);
+
 	}
 
 	@Test
 	public void testDAOFunctionality() throws DataNotFound {
-
 		List<Person> l = cd.getContacts();
-
-		// for (Person p : l) {
-		// System.out.println(p.getFirstName() + " " + p.getSurName());
-		// }
-
-		Assert.assertTrue(l.size() == 1);
+		Assert.assertTrue(l.size() >= 1);
 	}
 
 	@Test
-	public void testGetPersonBySurame() throws DataNotFound {
+	public void testGetPersonBySurname() throws DataNotFound {
 		Person p = cd.getPersonBySurname("Person");
 		Assert.assertEquals("Test", p.getFirstName());
 	}
@@ -76,15 +68,45 @@ public class TestPersistPersonBeanWithHibernate {
 	public void testGetPersonBySurameThenUpdateRecord() throws Exception {
 		Person p = cd.getPersonBySurname("Person");
 		Assert.assertEquals("Test", p.getFirstName());
-		p.getContactDetails().setHomeTelephone("123-456-7890");
-		p.getContactDetails().setMobileTelephone("098-765-4321");
+		Assert.assertEquals("test@example.com", p.getContactDetails()
+				.getEmail());
+
+		ContactDetails c = p.getContactDetails();
+		c.setHomeTelephone("1234567890");
+		c.setMobileTelephone("0987654321");
+		p.setContactDetails(c);
+
+		Assert.assertEquals("0987654321", p.getContactDetails()
+				.getMobileTelephone());
 
 		cd.saveOrUpdatePerson(p);
 
 		Person p2 = cd.getPersonBySurname("Person");
-		Assert.assertEquals("123-456-7890", p2.getContactDetails()
+		Assert.assertEquals("1234567890", p2.getContactDetails()
 				.getHomeTelephone());
+		Assert.assertEquals("0987654321", p2.getContactDetails()
+				.getMobileTelephone());
 
 	}
 
+	@Test
+	public void testCreatePersonThenGetPersonBySurnameThenDeletePerson()
+			throws Exception {
+
+		Person p = new Person();
+		p.setFirstName("Bar");
+		p.setSurName("Foo");
+		cd.saveOrUpdatePerson(p);
+		Person p2 = cd.getPersonBySurname("Foo");
+		p2.setMiddleName("Test");
+		Assert.assertEquals("Foo", p2.getSurName());
+		cd.saveOrUpdatePerson(p2);
+		Person p3 = cd.getPersonBySurname("Foo");
+		Assert.assertEquals("Test", p3.getMiddleName());
+		cd.deletePerson(p3);
+
+		List<Person> l = cd.getContacts();
+		Assert.assertTrue(l.size() == 1);
+
+	}
 }
