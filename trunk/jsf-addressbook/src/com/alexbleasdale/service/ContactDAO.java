@@ -19,8 +19,9 @@ import com.alexbleasdale.hibernate.HibernateUtil;
 
 public class ContactDAO extends DAO {
 
-	// public ContactDAO{}
-
+	/**
+	 * Returns a list of all Contacts in the database
+	 */
 	public List<Person> getContacts() throws DataNotFound {
 
 		try {
@@ -33,5 +34,26 @@ public class ContactDAO extends DAO {
 			throw new DataNotFound("The DAO could not retrieve the named user",
 					e);
 		}
+	}
+
+	/**
+	 * Saves or updates a Contact (Person)
+	 * 
+	 * @param p
+	 * @throws Exception
+	 */
+	public void saveOrUpdatePerson(Person p) throws Exception {
+		try {
+			Session s = HibernateUtil.beginTransaction();
+			s.saveOrUpdate(p);
+			HibernateUtil.commitTransaction();
+		} catch (Exception e) {
+			log.log(Level.SEVERE,
+					"The DAO could not save or update the Contact", e);
+			HibernateUtil.rollbackTransaction();
+			throw new DataNotFound(
+					"The DAO could not save or update the Contact", e);
+		}
+
 	}
 }
