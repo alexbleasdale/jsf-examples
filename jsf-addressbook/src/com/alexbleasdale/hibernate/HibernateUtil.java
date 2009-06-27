@@ -1,4 +1,4 @@
-package com.example.hibernate;
+package com.alexbleasdale.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,10 +6,10 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-import com.example.jsf.beans.Address;
-import com.example.jsf.beans.ContactDetails;
-import com.example.jsf.beans.Location;
-import com.example.jsf.beans.Person;
+import com.alexbleasdale.beans.Address;
+import com.alexbleasdale.beans.ContactDetails;
+import com.alexbleasdale.beans.Location;
+import com.alexbleasdale.beans.Person;
 
 public class HibernateUtil {
 

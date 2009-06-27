@@ -1,4 +1,4 @@
-package com.example.jsf.util;
+package com.alexbleasdale.jsf.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
