@@ -24,7 +24,7 @@ import com.alexbleasdale.exception.IsoCountryCodeError;
 public class StateMapping {
 
 	private HtmlSelectOneMenu stateSelectOneMenu;
-	// US State Mapping
+
 	private final Map<String, String> USStateMapping = new HashMap<String, String>() {
 
 		private static final long serialVersionUID = 878045909051468915L;
@@ -191,8 +191,8 @@ public class StateMapping {
 		stateSelectOneMenu.getChildren().add(items);
 		return stateSelectOneMenu;
 	}
-	
-	public void setUsStateMappingSelectOneMenu(HtmlSelectOneMenu h){
+
+	public void setUsStateMappingSelectOneMenu(HtmlSelectOneMenu h) {
 		stateSelectOneMenu = h;
 	}
 
