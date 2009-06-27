@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.service.TestPersistPersonBeanWithHibernate" failures="0" tests="1" time="1.689" errors="0">
-  <properties/>
-  <testcase name="PersistOnePersonToDb" time="0.521" classname="com.example.service.TestPersistPersonBeanWithHibernate"/>
-</testsuite>
