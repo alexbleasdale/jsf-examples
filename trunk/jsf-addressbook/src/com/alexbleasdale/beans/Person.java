@@ -12,6 +12,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+/**
+ * Standard Person Bean
+ * 
+ * @author alexbleasdale
+ * 
+ */
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Person {

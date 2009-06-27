@@ -4,6 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * Standard Address Bean
+ * 
+ * @author alexbleasdale
+ * 
+ */
+
 @Entity
 public class Address {
 
