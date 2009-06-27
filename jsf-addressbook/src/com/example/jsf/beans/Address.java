@@ -1,7 +1,13 @@
 package com.example.jsf.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Address {
 
+	private Long id;
 	private String streetAddress1;
 	private String streetAddress2;
 	private String locality;
@@ -13,6 +19,16 @@ public class Address {
 	/**
 	 * Getters and Setters
 	 */
+
+	@Id
+	@GeneratedValue
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getStreetAddress1() {
 		return streetAddress1;
@@ -70,16 +86,13 @@ public class Address {
 		this.country = country;
 	}
 
-	/**
-	 * hashCode and equals
-	 */
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((locality == null) ? 0 : locality.hashCode());
 		result = prime * result
@@ -111,6 +124,11 @@ public class Address {
 				return false;
 		} else if (!country.equals(other.country))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (locality == null) {
 			if (other.locality != null)
 				return false;
@@ -138,7 +156,7 @@ public class Address {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Address [city=" + city + ", country=" + country + ", locality="
