@@ -1,4 +1,4 @@
-package com.example.service;
+package com.alexbleasdale.service;
 
 import java.util.Date;
 
@@ -8,10 +8,10 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.example.hibernate.HibernateUtil;
-import com.example.jsf.beans.Address;
-import com.example.jsf.beans.Location;
-import com.example.jsf.beans.Person;
+import com.alexbleasdale.beans.Address;
+import com.alexbleasdale.beans.Location;
+import com.alexbleasdale.beans.Person;
+import com.alexbleasdale.hibernate.HibernateUtil;
 
 public class TestPersistPersonBeanWithHibernate {
 
