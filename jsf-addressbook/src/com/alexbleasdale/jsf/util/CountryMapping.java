@@ -299,6 +299,7 @@ public class CountryMapping {
 	 * @see: http://www.coderanch.com/t/211197/JSF/java/JSF-drop-down
 	 */
 	public HtmlSelectOneMenu getCountryMappingSelectOneMenu() {
+		// Logger.getAnonymousLogger().log(Level.INFO, "** Country Mapping **");
 		countrySelectOneMenu = new HtmlSelectOneMenu();
 		final Collection<SelectItem> list = new ArrayList<SelectItem>();
 

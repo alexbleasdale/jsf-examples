@@ -34,8 +34,21 @@
 	<managed-bean-class>com.alexbleasdale.jsf.util.StateMapping</managed-bean-class>
 	<managed-bean-scope>request</managed-bean-scope>
 </managed-bean> 
+<managed-bean>
+	<managed-bean-name>DAOController</managed-bean-name>
+	<managed-bean-class>com.alexbleasdale.jsf.dao.DAOController</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+</managed-bean> 
 <navigation-rule>
 	<from-view-id>/contacts/add.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>process</from-outcome>
+		<to-view-id>/contacts/processing.jsp</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-outcome>error</from-outcome>
+		<to-view-id>/contacts/error.jsp</to-view-id>
+	</navigation-case>
 	<navigation-case>
 		<from-outcome>result</from-outcome>
 		<to-view-id>/contacts/result.jsp</to-view-id>
