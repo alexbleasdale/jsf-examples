@@ -6,14 +6,20 @@ import java.util.logging.Logger;
 
 import javax.faces.context.FacesContext;
 
+import com.alexbleasdale.beans.Address;
+import com.alexbleasdale.beans.ContactDetails;
+import com.alexbleasdale.beans.Location;
 import com.alexbleasdale.beans.Person;
 import com.alexbleasdale.service.ContactDAO;
 
 public class DAOController {
 
+	ContactDAO cd;
+
 	public DAOController() {
-		Logger.getAnonymousLogger().log(Level.INFO, "DAOController - present");
-		System.out.println("does this show up?");
+		Logger.getAnonymousLogger().log(Level.INFO,
+				"DAOController :: in Constructor");
+		cd = new ContactDAO();
 	}
 
 	/**
@@ -22,34 +28,34 @@ public class DAOController {
 	 * @return
 	 * @throws Exception
 	 */
-	public String doAddContact() throws Exception {
+	public String doAddContact() {
 
-		Map parameterMap = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap();
-		System.out.println("param map" + parameterMap.toString());
+		// Map parameterMap = FacesContext.getCurrentInstance()
+		// .getExternalContext().getRequestParameterMap();
+		// System.out.println("param map" + parameterMap.toString());
+		//
+		Map pm = FacesContext.getCurrentInstance().getExternalContext()
+				.getRequestMap();
 
-		Map parameterMap2 = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestMap();
-		System.out.println("param map2" + parameterMap2.toString());
-		Person p = new Person();
-		for (Object o : parameterMap2.keySet()) {
-			if (o.equals("PersonBean")) {
-				p = (Person) parameterMap2.get(o);
-			}
+		// TODO - can this method make a call to google maps and get the lat /
+		// long values?
+
+		Person p = (Person) pm.get("PersonBean");
+		Address a = (Address) pm.get("AddressBean");
+		ContactDetails c = (ContactDetails) pm.get("ContactDetailsBean");
+		Location l = (Location) pm.get("LocationBean");
+
+		p.setAddress(a);
+		p.setContactDetails(c);
+		p.setLocation(l);
+
+		try {
+			cd.saveOrUpdatePerson(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ("error");
 		}
-		System.out.println(p.getFirstName() + " | " + p.getSurName());
-		ContactDAO cd = new ContactDAO();
-		cd.saveOrUpdatePerson(p);
-		// Person p = (Person) parameterMap.get(PersonBean);
-		// System.out.println(p.toString());
-		// Person p = parameterMap2.get();
-		// System.out.println(p.toString());
-		// TODO - if this is a managed bean, it should instantiate all the
-		// pieces it needs once and only once
-		Logger.getAnonymousLogger().log(Level.INFO,
-				"DAOController - handling Add");
-		System.out
-				.println("****** ******** *********  WE ARE HERE!! ***** *****  ***** ");
 
 		return ("result");
 	}
