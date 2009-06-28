@@ -10,7 +10,10 @@ import com.alexbleasdale.beans.Address;
 import com.alexbleasdale.beans.ContactDetails;
 import com.alexbleasdale.beans.Location;
 import com.alexbleasdale.beans.Person;
+import com.alexbleasdale.http.HttpClientExecutor;
+import com.alexbleasdale.json.JsonParserTools;
 import com.alexbleasdale.service.ContactDAO;
+import com.alexbleasdale.url.StringParserTools;
 
 public class DAOController {
 
@@ -18,7 +21,7 @@ public class DAOController {
 
 	public DAOController() {
 		Logger.getAnonymousLogger().log(Level.INFO,
-				"DAOController :: in Constructor");
+				"DAOController :: in DAOController Constructor");
 		cd = new ContactDAO();
 	}
 
@@ -30,20 +33,30 @@ public class DAOController {
 	 */
 	public String doAddContact() {
 
-		// Map parameterMap = FacesContext.getCurrentInstance()
-		// .getExternalContext().getRequestParameterMap();
-		// System.out.println("param map" + parameterMap.toString());
-		//
-		Map pm = FacesContext.getCurrentInstance().getExternalContext()
+		// TODO - this method now persists the bean, but should set a google
+		// maps url too. e.g.
+		// http://maps.google.com/?q=Your+text+here@37.4219720,-122.0841430
+		// (long / lat)
+
+		Map<?, ?> pm = FacesContext.getCurrentInstance().getExternalContext()
 				.getRequestMap();
-
-		// TODO - can this method make a call to google maps and get the lat /
-		// long values?
-
 		Person p = (Person) pm.get("PersonBean");
 		Address a = (Address) pm.get("AddressBean");
 		ContactDetails c = (ContactDetails) pm.get("ContactDetailsBean");
-		Location l = (Location) pm.get("LocationBean");
+
+		// Now create the Google Maps link
+
+		String url = StringParserTools.buildGmapsUrlFromAddress(a);
+		/**
+		 * This should be managed through jsf? Maybe something like a managed
+		 * bean with a load of getters and setters which is kicked off in the
+		 * faces-config.xml
+		 */
+		HttpClientExecutor hce = new HttpClientExecutor();
+		String gMapsMetadata = hce.httpGet(url);
+		Location l = new Location();
+		l.setgMapsServiceMetadata(gMapsMetadata);
+		l = JsonParserTools.parseGmapsJsonForLatAndLong(gMapsMetadata, l);
 
 		p.setAddress(a);
 		p.setContactDetails(c);
