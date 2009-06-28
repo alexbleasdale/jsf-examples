@@ -41,6 +41,7 @@
 </managed-bean> 
 <navigation-rule>
 	<from-view-id>/contacts/add.jsp</from-view-id>
+	<!--  this case currently isn't used: -->
 	<navigation-case>
 		<from-outcome>process</from-outcome>
 		<to-view-id>/contacts/processing.jsp</to-view-id>
