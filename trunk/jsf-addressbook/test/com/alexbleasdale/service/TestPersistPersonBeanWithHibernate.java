@@ -15,6 +15,7 @@ import com.alexbleasdale.beans.Location;
 import com.alexbleasdale.beans.Person;
 import com.alexbleasdale.exception.DataNotFound;
 import com.alexbleasdale.hibernate.HibernateUtil;
+import com.alexbleasdale.http.HttpClientExecutor;
 
 public class TestPersistPersonBeanWithHibernate {
 
@@ -45,6 +46,12 @@ public class TestPersistPersonBeanWithHibernate {
 		Location l = new Location();
 		l.setLongitude(10.0);
 		l.setLatitude(10.0);
+		HttpClientExecutor hce = new HttpClientExecutor();
+
+		l
+				.setgMapsServiceMetadata(hce
+						.httpGet("http://maps.google.com/maps/geo?q=1600+Amphitheatre+Parkway,+Mountain+View,+CA&output=json&oe=utf8"));
+
 		p.setLocation(l);
 
 		cd = new ContactDAO();

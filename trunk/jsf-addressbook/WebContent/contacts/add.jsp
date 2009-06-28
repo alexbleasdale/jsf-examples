@@ -50,6 +50,11 @@
 					<h:inputText value="#{AddressBean.city}" />
 				</p>
 				<p>
+					<h:outputText value="Postal Code" />
+					<h:inputText id="postalCode" value="#{AddressBean.postalCode}" required="true" />
+					<h:message style="color: red" for="postalCode" />
+				</p>
+				<p>
 					<h:outputText value="State"/>
 					<h:selectOneMenu binding="#{StateMappingBean.usStateMappingSelectOneMenu}" styleClass="common-dropdown" value="#{AddressBean.state}">
 						<f:selectItem itemLabel="Please select state" />

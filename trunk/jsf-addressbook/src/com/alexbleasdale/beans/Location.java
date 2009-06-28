@@ -3,6 +3,7 @@ package com.alexbleasdale.beans;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  * Standard Location Bean
@@ -18,6 +19,7 @@ public class Location {
 
 	private double latitude;
 	private double longitude;
+	private String gMapsServiceMetadata;
 
 	/**
 	 * Getters and Setters
@@ -49,14 +51,23 @@ public class Location {
 		this.longitude = d;
 	}
 
-	/**
-	 * hashCode and equals
-	 */
+	@Lob
+	public String getgMapsServiceMetadata() {
+		return gMapsServiceMetadata;
+	}
+
+	public void setgMapsServiceMetadata(String gMapsServiceMetadata) {
+		this.gMapsServiceMetadata = gMapsServiceMetadata;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime
+				* result
+				+ ((gMapsServiceMetadata == null) ? 0 : gMapsServiceMetadata
+						.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(latitude);
@@ -75,6 +86,11 @@ public class Location {
 		if (getClass() != obj.getClass())
 			return false;
 		Location other = (Location) obj;
+		if (gMapsServiceMetadata == null) {
+			if (other.gMapsServiceMetadata != null)
+				return false;
+		} else if (!gMapsServiceMetadata.equals(other.gMapsServiceMetadata))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -89,12 +105,10 @@ public class Location {
 		return true;
 	}
 
-	/**
-	 * toString()
-	 */
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", latitude=" + latitude + ", longitude="
+		return "Location [gMapsServiceMetadata=" + gMapsServiceMetadata
+				+ ", id=" + id + ", latitude=" + latitude + ", longitude="
 				+ longitude + "]";
 	}
 
