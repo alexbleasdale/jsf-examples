@@ -79,7 +79,8 @@
 				</p>
 	   	</fieldset>
 	   	
-	   	<h:commandButton action="result" value="Submit" />
+	   	<h:commandButton action="#{DAOController.doAddContact}" value="Submit" />
+	   		
 	</h:form>
 </body>
 </html>
