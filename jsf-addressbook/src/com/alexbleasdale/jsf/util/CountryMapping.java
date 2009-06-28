@@ -309,7 +309,7 @@ public class CountryMapping {
 
 		TreeBidiMap tbm = new TreeBidiMap(countryMapping);
 		for (Object o : tbm.inverseOrderedBidiMap().keySet()) {
-			list.add(new SelectItem(o, (String) tbm.get(o)));
+			list.add(new SelectItem(tbm.getKey(o), o.toString()));
 		}
 
 		final UISelectItems items = new UISelectItems();
