@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" 
+        content="text/html; charset=iso-8859-1" />
+<title>Facelet Configuration Example</title>
+</head>
+<body>
+	<h1>Basic JSF-Facelet Project Structure</h1>
+	<h2>Hello #{param.name}!</h2>
+	<p>If you can see the param name being resolved above, the project is properly configured.</p>
+	<p>To test (once deployed): <a href="http://localhost:8080/jsf-facelets/index.jsf?name=facelets%20test">http://localhost:8080/jsf-facelets/index.jsf?name=facelets%20test</a></p>
+	<c:if test="${param.name eq 'test'}"><p>if the parameter passed in is 'test', the if statement resolves to true - and so this line will be visible</p></c:if>
+</body>
+</html>
